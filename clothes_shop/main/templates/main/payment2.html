@@ -1,0 +1,26 @@
+
+
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          {% if payment_successful %}
+            <h2 class="text-center mb-4">Оплата прошла успешно!</h2>
+            <p class="text-center">Код подтверждения: {{ confirmation_code }}</p>
+          {% else %}
+            <h2 class="text-center mb-4" style="color: green;">Оплата прошла успешно!</h2>
+          {% endif %}
+          <div class="text-center">
+            <a href="/" class="btn btn-primary">На главную</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <script>
+       const chatSocket = new WebSocket(
+    'ws://' + window.location.host +
+    '/ws/chat/'
+);
+
+chatSocket.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    const message = data['message'];
+    const username = data['username'];
+
+    // Display message in the DOM
+    const chat = document.querySelector('#chat-messages');
+    const line = document.createElement('p');
+    line.innerHTML = '<strong>' + username + ': </strong>' + message;
+    chat.appendChild(line);
+};
+
+function sendMessage() {
+    const messageInputDom = document.querySelector('#message');
+    const message = messageInputDom.value;
+    const username = 'Your Username';
+
+    // Send message to WebSocket
+    chatSocket.send(JSON.stringify({
+        'message': message,
+        'username': username
+    }));
+
+    // Clear input field
+    messageInputDom.value = '';
+}
+
+document.querySelector('#send-message').onclick = function(e) {
+    sendMessage();
+};
+
+document.querySelector('#message').onkeyup = function(e) {
+    if (e.keyCode === 13) {  // Enter key
+        sendMessage();
+    }
+};
+    </script>
+</head>
+<body>
+    <h1>Chat Page</h1>
+    <div id="chat-messages"></div>
+    <div>
+        <input type="text" id="message" placeholder="Type your message here...">
+        <button id="send-message">Send</button>
+    </div>
+</body>
+</html>

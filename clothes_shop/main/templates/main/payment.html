@@ -1,0 +1,66 @@
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="container">
+  <h2 class="text-center mb-4">Оплата заказа</h2>
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="card_number">Номер карты</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="card_number" name="card_number" placeholder="Введите номер карты">
+                <div class="input-group-append">
+                  <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="expiry_date">Срок действия</label>
+              <input type="text" class="form-control" id="expiry_date" name="expiry_date" placeholder="MM / YY">
+            </div>
+            <div class="form-group">
+              <label for="card_holder_name">Имя держателя карты</label>
+              <input type="text" class="form-control" id="card_holder_name" name="card_holder_name" placeholder="Введите имя держателя карты">
+            </div>
+            <div class="form-group">
+              <label for="cvv_code">CVV-код</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="cvv_code" name="cvv_code" placeholder="Введите CVV-код">
+                <div class="input-group-append">
+                  <span class="input-group-text"><i class="fa fa-question-circle"></i></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-primary btn-block">Оплатить</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if payment_successful %}
+    <p style="color:green">Оплата прошла успешно! Код подтверждения: {{ confirmation_code }}</p>
+{% else %}
+
+<script>
+  document.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    window.location.href = "/successful";
+  });
+</script>
+
+
+{% endif %}
+
+
+
+{% endblock %}

@@ -1,0 +1,26 @@
+
+html, body {
+  margin: 50;
+  padding: 20;
+}
+
+.menu {
+position: absolute;
+width: 1472px;
+height: 100px;
+left: 0;
+top: 0;
+background-color: white;
+border: 1px solid #ccc;
+border-radius: 8px;
+padding: 16px;
+
+
+}
+
+.text {
+  position: relative;
+  top: 10px;
+  z-index: 100;
+  right:-40px; /* move text 100 pixels to the right */
+}

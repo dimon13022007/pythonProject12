@@ -1,0 +1,9 @@
+
+{% block content %}
+{% for user in users %}
+  <h1>Вы успешно зарегистрированы как: {{ user.username }}</h1>
+  <ul>
+
+    {% endfor %}
+  </ul>
+{% endblock %}
